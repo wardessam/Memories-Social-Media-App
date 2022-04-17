@@ -25,13 +25,16 @@ const Form = ()=>{
     }
     return(
        <Box sx={{
-           
+         boxShadow:2
        }}>
-           <form autoComplete='off' noValidate onSubmit={handleSubmit} >
-             <Typography variant='h6'>Creating a Memory</Typography>
+           <form autoComplete='off' noValidate onSubmit={handleSubmit} style={{margin:20}}>
+
+             <Typography variant='h5' align="center"
+             style={{margin:10}}>Creating a Memory</Typography>
              <TextField name="creator" 
              variant='outlined' 
              label='Creator' 
+             style={{margin:5}}
              fullWidth
              value={postData.creator}
              onChange={(e)=> setpostData({...postData,creator:e.target.value})}/>
@@ -39,6 +42,7 @@ const Form = ()=>{
            <TextField name="title" 
              variant='outlined' 
              label='Title' 
+             style={{margin:10}}
              fullWidth
              value={postData.title}
              onChange={(e)=> setpostData({...postData,title:e.target.value})}/>
@@ -46,6 +50,7 @@ const Form = ()=>{
            <TextField name="message" 
              variant='outlined' 
              label='Message' 
+             style={{margin:10}}
              fullWidth
              value={postData.message}
              onChange={(e)=> setpostData({...postData,message:e.target.value})}/>
@@ -53,10 +58,12 @@ const Form = ()=>{
            <TextField name="tags" 
              variant='outlined' 
              label='Tags' 
+             style={{margin:10}}
              fullWidth
              value={postData.tags}
              onChange={(e)=> setpostData({...postData,tags:e.target.value})}/>
-             <div>
+             <div
+             style={{margin:10}}>
                  <FileBase
                  type='file'
                  multiple={false}
@@ -67,11 +74,13 @@ const Form = ()=>{
              variant='contained'
              color="primary"
              size='large'
+             style={{margin:10}}
              type='submit' fullWidth>Submit</Button>
               <Button
              variant='contained'
              color="error"
              size='large'
+             style={{margin:10}}
              onClick={clear} fullWidth>Clear</Button>
            </form>
        </Box>

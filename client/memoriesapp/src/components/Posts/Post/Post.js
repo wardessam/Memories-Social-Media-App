@@ -1,32 +1,36 @@
-import {Card,CardActions,CardContent,CardMedia,Button,Typography} from '@mui/material';
+import {Card,CardActions,CardHeader,CardContent,CardMedia,Button,Typography} from '@mui/material';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt'
 import DeleteIcon from '@mui/icons-material/Delete'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import moment from 'moment';
 const Post = ({post})=>{
     return(
-       <Card>
+       <Card sx={{
+           m:1
+       }}>
+            <CardHeader
+       
+        action={
+            <Button style={{color:'black'}} size="small" onClick={()=>{}}>
+            <MoreHorizIcon fontSize='default'/>
+        </Button>
+        }
+        title={post.creator}
+        subheader={moment(post.createdAt).fromNow()}
+      />
            <CardMedia
            height="194"
            component="img"
            image = {post.selectedFile}
            title= {post.title} />
-           <div>
-               <Typography variant="h6">{post.creator}</Typography>
-               <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-           </div>
-           <div>
-               <Button style={{color:'black'}} size="small" onClick={()=>{}}>
-                   <MoreHorizIcon fontSize='default'/>
-               </Button>
-           </div>
-           <div>
+           <CardContent>
+           <Typography variant="body1" color="text.secondary" gutterBottom>{post.message}</Typography>
+           </CardContent>
+           
            <Typography variant="body2" color='primary'>{post.tags.map((tag)=>`# ${tag} `)}</Typography>
           
-           </div>
-           <CardContent>
-           <Typography variant="h5" gutterBottom>{post.message}</Typography>
-           </CardContent>
+           
+           
            <CardActions>
                <Button size='small' color='primary' onClick={()=>{}}>
                    <ThumbUpAltIcon fontSize='small'/>
