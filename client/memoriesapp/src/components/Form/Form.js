@@ -1,10 +1,10 @@
 import {TextField,Button,Typography,Box} from '@mui/material';
-import { padding } from '@mui/system';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import FileBase from 'react-file-base64'
 import { useDispatch } from 'react-redux';
-import {createPost} from '../../actions/posts'
-const Form = ()=>{
+import {createPost,updatePost} from '../../actions/posts'
+import { useSelector } from 'react-redux';
+const Form = ({currentId,setCurrentId})=>{
     const [postData,setpostData] = useState({
         creator:'',
         title:'',
@@ -14,23 +14,42 @@ const Form = ()=>{
     });
     
     const dispatch = useDispatch();
-
+    const post = useSelector((state)=> currentId ? state.posts.find((p)=> p._id ===currentId) : null );
+    useEffect(()=>{
+     if(post){ setpostData(post)
+        console.log(post._id);
+     }
+    },[post])
     const handleSubmit =(e)=>{
        e.preventDefault();
        console.log(postData.selectedFile)
+       if(currentId){
+        dispatch(updatePost(currentId,postData))
+       }
+       else{
        dispatch(createPost(postData))
+       }
+       clear()
     }
     const clear =()=>{
-
+         setCurrentId(null);
+         setpostData({
+            creator:'',
+            title:'',
+            message:'',
+            tags:'',
+            selectedFile:''
+        });
     }
     return(
        <Box sx={{
-         boxShadow:2
+         boxShadow:2,
+         backgroundColor:'white'
        }}>
            <form autoComplete='off' noValidate onSubmit={handleSubmit} style={{margin:20}}>
 
              <Typography variant='h5' align="center"
-             style={{margin:10}}>Creating a Memory</Typography>
+             style={{margin:10}}>{ currentId? 'Editing':'Creating'} a Memory</Typography>
              <TextField name="creator" 
              variant='outlined' 
              label='Creator' 

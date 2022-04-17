@@ -3,7 +3,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt'
 import DeleteIcon from '@mui/icons-material/Delete'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import moment from 'moment';
-const Post = ({post})=>{
+const Post = ({post, setCurrentId})=>{
     return(
        <Card sx={{
            m:1
@@ -11,7 +11,7 @@ const Post = ({post})=>{
             <CardHeader
        
         action={
-            <Button style={{color:'black'}} size="small" onClick={()=>{}}>
+            <Button style={{color:'black'}} size="small" onClick={()=>setCurrentId(post._id)}>
             <MoreHorizIcon fontSize='default'/>
         </Button>
         }
@@ -37,7 +37,7 @@ const Post = ({post})=>{
                    Like
                    {post.likeCount}
                </Button>
-               <Button size='small' color='primary' onClick={()=>{}}>
+               <Button size='small' color='error' onClick={()=>{}}>
                    <DeleteIcon fontSize='small'/>
                    Delete
                </Button>
